@@ -20,7 +20,7 @@ void check_env(r_var **h, char *in, data_shell *data)
 		{
 			if (_envr[row][chr] == '=')
 			{
-				lval = _strscp(_envr[row] + chr + 1);
+				lval = _strlen(_envr[row] + chr + 1);
 				add_rvar_node(h, j, _envr[row] + chr + 1, lval);
 				return;
 			}
@@ -54,8 +54,8 @@ int check_vars(r_var **h, char *in, char *st, data_shell *data)
 {
 	int i, lst, lpd;
 
-	lst = _strscp(st);
-	lpd = _strscp(data->pid);
+	lst = _strlen(st);
+	lpd = _strlen(data->pid);
 
 	for (i = 0; in[i]; i++)
 	{
@@ -92,35 +92,35 @@ int check_vars(r_var **h, char *in, char *st, data_shell *data)
  * @nlen: new length
  * Return: replaced string
  */
-char *replaced_input(r_var **head, char *input, char *new_input, int nscp)
+char *replaced_input(r_var **head, char *input, char *new_input, int nlen)
 {
 	r_var *indx;
 	int i, j, k;
 
 	indx = *head;
-	for (j = i = 0; i < nscp; i++)
+	for (j = i = 0; i < nlen; i++)
 	{
 		if (input[j] == '$')
 		{
-			if (!(indx->scp_var) && !(indx->scp_val))
+			if (!(indx->len_var) && !(indx->len_val))
 			{
 				new_input[i] = input[j];
 				j++;
 			}
-			else if (indx->scp_var && !(indx->scp_val))
+			else if (indx->len_var && !(indx->len_val))
 			{
-				for (k = 0; k < indx->scp_var; k++)
+				for (k = 0; k < indx->len_var; k++)
 					j++;
 				i--;
 			}
 			else
 			{
-				for (k = 0; k < indx->scp_val; k++)
+				for (k = 0; k < indx->len_val; k++)
 				{
 					new_input[i] = indx->val[k];
 					i++;
 				}
-				j += (indx->scp_var);
+				j += (indx->len_var);
 				i--;
 			}
 			indx = indx->next;
@@ -146,12 +146,12 @@ char *rep_var(char *input, data_shell *datash)
 {
 	r_var *head, *indx;
 	char *status, *new_input;
-	int oscp, nscp;
+	int olen, nlen;
 
 	status = aux_itoa(datash->status);
 	head = NULL;
 
-	oscp = check_vars(&head, input, status, datash);
+	olen = check_vars(&head, input, status, datash);
 
 	if (head == NULL)
 	{
@@ -160,20 +160,20 @@ char *rep_var(char *input, data_shell *datash)
 	}
 
 	indx = head;
-	nscp = 0;
+	nlen = 0;
 
 	while (indx != NULL)
 	{
-		nscp += (indx->scp_val - indx->scp_var);
+		nlen += (indx->len_val - indx->len_var);
 		indx = indx->next;
 	}
 
-	nscp += oscp;
+	nlen += olen;
 
-	new_input = malloc(sizeof(char) * (nscp + 1));
-	new_input[nscp] = '\0';
+	new_input = malloc(sizeof(char) * (nlen + 1));
+	new_input[nlen] = '\0';
 
-	new_input = replaced_input(&head, input, new_input, nscp);
+	new_input = replaced_input(&head, input, new_input, nlen);
 
 	free(input);
 	free(status);

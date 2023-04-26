@@ -8,29 +8,29 @@
 char *_strdup(const char *s)
 {
 	char *new;
-	size_t scp;
+	size_t len;
 
-	scp = _strscp(s);
-	new = malloc(sizeof(char) * (scp + 1));
+	len = _strlen(s);
+	new = malloc(sizeof(char) * (len + 1));
 	if (new == NULL)
 		return (NULL);
-	_memcpy(new, s, scp + 1);
+	_memcpy(new, s, len + 1);
 	return (new);
 }
 
 /**
- * _strscp - Returns the scope of a string.
+ * _strlen - Returns the lenght of a string.
  * @s: Type char pointer
  * Return: Always 0.
  */
-int _strscp(const char *s)
+int _strlen(const char *s)
 {
-	int scp;
+	int len;
 
-	for (scp = 0; s[scp] != 0; scp++)
+	for (len = 0; s[len] != 0; len++)
 	{
 	}
-	return (scp);
+	return (len);
 }
 
 /**
@@ -78,7 +78,7 @@ char *_strtok(char str[], const char *delim)
 		if (cmp_chars(str, delim))
 			return (NULL);
 		splitted = str; /*Store first address*/
-		i = _strscp(str);
+		i = _strlen(str);
 		str_end = &str[i]; /*Store last address*/
 	}
 	str_start = splitted;

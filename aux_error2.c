@@ -7,16 +7,16 @@
  */
 char *error_env(data_shell *datash)
 {
-	int scope;
+	int length;
 	char *error;
 	char *ver_str;
-	char *message;
+	char *msg;
 
 	ver_str = aux_itoa(datash->counter);
-	message = ": Unable to add/remove from environment\n";
-	scope = _strscp(datash->av[0]) + _strscp(ver_str);
-	scope += _strscp(datash->args[0]) + _strscp(message) + 4;
-	error = malloc(sizeof(char) * (scope + 1));
+	msg = ": Unable to add/remove from environment\n";
+	length = _strlen(datash->av[0]) + _strlen(ver_str);
+	length += _strlen(datash->args[0]) + _strlen(msg) + 4;
+	error = malloc(sizeof(char) * (length + 1));
 	if (error == 0)
 	{
 		free(error);
@@ -29,7 +29,7 @@ char *error_env(data_shell *datash)
 	_strcat(error, ver_str);
 	_strcat(error, ": ");
 	_strcat(error, datash->args[0]);
-	_strcat(error, message);
+	_strcat(error, msg);
 	_strcat(error, "\0");
 	free(ver_str);
 
@@ -43,14 +43,14 @@ char *error_env(data_shell *datash)
  */
 char *error_path_126(data_shell *datash)
 {
-	int scope;
+	int length;
 	char *ver_str;
 	char *error;
 
 	ver_str = aux_itoa(datash->counter);
-	scope = _strscp(datash->av[0]) + _strscp(ver_str);
-	scope += _strscp(datash->args[0]) + 24;
-	error = malloc(sizeof(char) * (scope + 1));
+	length = _strlen(datash->av[0]) + _strlen(ver_str);
+	length += _strlen(datash->args[0]) + 24;
+	error = malloc(sizeof(char) * (length + 1));
 	if (error == 0)
 	{
 		free(error);

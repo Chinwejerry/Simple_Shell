@@ -11,11 +11,11 @@
 char *copy_info(char *name, char *value)
 {
 	char *new;
-	int scp_name, scp_value, scp;
+	int len_name, len_value, len;
 
-	scp_name = _strscp(name);
-	scp_value = _strscp(value);
-	scp = scp_name + scp_value + 2;
+	len_name = _strlen(name);
+	len_value = _strlen(value);
+	len = len_name + len_value + 2;
 	new = malloc(sizeof(char) * (len));
 	_strcpy(new, name);
 	_strcat(new, "=");

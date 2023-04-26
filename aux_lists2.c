@@ -17,9 +17,9 @@ r_var *add_rvar_node(r_var **head, int lvar, char *val, int lval)
 	if (new == NULL)
 		return (NULL);
 
-	new->scp_var = lvar;
+	new->len_var = lvar;
 	new->val = val;
-	new->scpi_val = lval;
+	new->len_val = lval;
 
 	new->next = NULL;
 	temp = *head;

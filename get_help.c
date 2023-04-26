@@ -26,7 +26,7 @@ int get_help(data_shell *datash)
 		aux_help_alias();
 	else
 		write(STDERR_FILENO, datash->args[0],
-		      _strscp(datash->args[0]));
+		      _strlen(datash->args[0]));
 
 	datash->status = 0;
 	return (1);
