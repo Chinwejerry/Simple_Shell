@@ -1,18 +1,18 @@
 #include "main.h"
 
 /**
- * get_len - Get the lenght of a number.
+ * get_scp - Get the scope of a number.
  * @n: type int number.
- * Return: Lenght of a number.
+ * Return: scope of a number.
  */
-int get_len(int n)
+int get_scp(int n)
 {
 	unsigned int n1;
-	int lenght = 1;
+	int scope = 1;
 
 	if (n < 0)
 	{
-		lenght++;
+		scope++;
 		n1 = n * -1;
 	}
 	else
@@ -21,11 +21,9 @@ int get_len(int n)
 	}
 	while (n1 > 9)
 	{
-		lenght++;
-		n1 = n1 / 10;
-	}
-
-	return (lenght);
+		scope++;
+		n1 = n1 
+	return (scope);
 }
 /**
  * aux_itoa - function converts int to string.
@@ -35,14 +33,14 @@ int get_len(int n)
 char *aux_itoa(int n)
 {
 	unsigned int n1;
-	int lenght = get_len(n);
+	int scope = get_scp(n);
 	char *buffer;
 
-	buffer = malloc(sizeof(char) * (lenght + 1));
+	buffer = malloc(sizeof(char) * (scope + 1));
 	if (buffer == 0)
 		return (NULL);
 
-	*(buffer + lenght) = '\0';
+	*(buffer + scope) = '\0';
 
 	if (n < 0)
 	{
@@ -54,11 +52,11 @@ char *aux_itoa(int n)
 		n1 = n;
 	}
 
-	lenght--;
+	scope--;
 	do {
-		*(buffer + lenght) = (n1 % 10) + '0';
+		*(buffer + scope) = (n1 % 10) + '0';
 		n1 = n1 / 10;
-		lenght--;
+		scope--;
 	}
 	while (n1 > 0)
 		;
