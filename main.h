@@ -67,17 +67,17 @@ typedef struct line_list_s
 
 /**
  * struct r_var_list - single linked list
- * @len_var: length of the variable
+ * @scp_var: length of the variable
  * @val: value of the variable
- * @len_val: length of the value
+ * @scp_val: length of the value
  * @next: next node
  * Description: single linked list to store variables
  */
 typedef struct r_var_list
 {
-	int len_var;
+	int scp_var;
 	char *val;
-	int len_val;
+	int scp_val;
 	struct r_var_list *next;
 } r_var;
 
@@ -116,7 +116,7 @@ char **_reallocdp(char **ptr, unsigned int old_size, unsigned int new_size);
 
 /* aux_str2.c */
 char *_strdup(const char *s);
-int _strlen(const char *s);
+int _strscp(const char *s);
 int cmp_chars(char str[], const char *delim);
 char *_strtok(char str[], const char *delim);
 int _isdigit(const char *s);
@@ -148,7 +148,7 @@ char **split_line(char *input);
 /* rep_var.c */
 void check_env(r_var **h, char *in, data_shell *data);
 int check_vars(r_var **h, char *in, char *st, data_shell *data);
-char *replaced_input(r_var **head, char *input, char *new_input, int nlen);
+char *replaced_input(r_var **head, char *input, char *new_input, int nscp);
 char *rep_var(char *input, data_shell *datash);
 
 /* get_line.c */
@@ -191,7 +191,7 @@ int (*get_builtin(char *cmd))(data_shell *datash);
 int exit_shell(data_shell *datash);
 
 /* aux_stdlib.c */
-int get_len(int n);
+int get_scp(int n);
 char *aux_itoa(int n);
 int _atoi(char *s);
 

@@ -31,7 +31,7 @@ int get_error(data_shell *datash, int eval)
 
 	if (error)
 	{
-		write(STDERR_FILENO, error, _strlen(error));
+		write(STDERR_FILENO, error, _strscp(error));
 		free(error);
 	}
 
